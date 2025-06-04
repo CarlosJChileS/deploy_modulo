@@ -180,7 +180,31 @@ En la carpeta `/screenshots` se incluyen capturas reales de todas las pruebas re
   ![POST Supabase](screenshots/post_supabase.png)
   ![Revisión POST](screenshots/revision_post.png)
 
----
+
+## ☁️ **Despliegue en Render**
+
+El módulo fue desplegado correctamente en el hosting gratuito **[Render](https://render.com/)**, lo que permite consumir la API REST desde cualquier parte del mundo.
+
+* **URL pública del backend:**
+  [`https://deploy-modulo.onrender.com`](https://deploy-modulo.onrender.com)
+
+### Endpoints accesibles en producción
+
+Puedes consumir los endpoints principales desde internet (puedes probarlos con Postman o navegador):
+
+* [`/api/criterios`](https://deploy-modulo.onrender.com/api/criterios)
+* [`/api/calificaciones`](https://deploy-modulo.onrender.com/api/calificaciones)
+
+### Evidencias del despliegue
+
+* **Comprobación del despliegue en Render**
+  ![Comprobación despliegue Render](screenshots/comprobaciondespliegueenrender.png)
+
+* **Consumo del endpoint `/api/calificaciones` en producción**
+  ![API Calificaciones Render](screenshots/renderapicalificaciones.png)
+
+* **Consumo del endpoint `/api/criterios` en producción**
+  ![API Criterios Render](screenshots/renderapicriterio.png)
 
 ## ⚙️ Recomendaciones y Notas
 
