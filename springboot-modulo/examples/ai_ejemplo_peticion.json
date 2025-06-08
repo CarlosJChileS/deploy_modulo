@@ -9,6 +9,11 @@
     { "observacion": "Sigue practicando", "autor": "IA" }
 =======
   "detalles": [
-    { "criterioId": 5, "puntaje": 6 }
+    {
+      "criterioId": 5,
+      "puntaje": 6,
+      "slideId": 1,
+      "comentario": "Buen ritmo"
+    }
   ]
 }

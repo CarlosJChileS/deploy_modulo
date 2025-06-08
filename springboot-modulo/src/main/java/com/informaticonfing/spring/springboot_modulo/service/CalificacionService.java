@@ -154,6 +154,10 @@ public class CalificacionService {
         }
 
         Calificacion saved = repository.save(calificacion);
-        return CalificacionMapper.toDTO(saved);
+
+        // Obtener los detalles actualizados para incluirlos en la respuesta
+        List<DetalleCalificacion> detallesActualizados = detalleRepo.findByCalificacionId(saved.getId());
+
+        return CalificacionMapper.toDTO(saved, detallesActualizados);
     }
 }
