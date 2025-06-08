@@ -1,0 +1,7 @@
+{
+  "calificacionId": 1,
+  "puntajeGlobalAi": 7.0,
+  "detalles": [
+    { "criterioId": 5, "puntaje": 6 }
+  ]
+}
