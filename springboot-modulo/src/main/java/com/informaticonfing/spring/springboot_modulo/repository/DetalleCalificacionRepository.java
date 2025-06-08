@@ -11,3 +11,4 @@ public interface DetalleCalificacionRepository extends JpaRepository<DetalleCali
     // Obtiene todos los detalles asociados a una calificación
     List<DetalleCalificacion> findByCalificacionId(Long calificacionId);
 }
+// Aquí puedes agregar métodos personalizados si algún día los necesitas.

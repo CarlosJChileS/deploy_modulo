@@ -7,5 +7,8 @@
   ],
   "feedbacks": [
     { "observacion": "Sigue practicando", "autor": "IA" }
+=======
+  "detalles": [
+    { "criterioId": 5, "puntaje": 6 }
   ]
 }

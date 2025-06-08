@@ -5,6 +5,7 @@ import com.informaticonfing.spring.springboot_modulo.dto.CalificacionResponseDTO
 import com.informaticonfing.spring.springboot_modulo.dto.AiCalificacionDTO;
 import com.informaticonfing.spring.springboot_modulo.dto.AiDetalleDTO;
 import com.informaticonfing.spring.springboot_modulo.dto.AiFeedbackDTO;
+
 import com.informaticonfing.spring.springboot_modulo.mapper.CalificacionMapper;
 import com.informaticonfing.spring.springboot_modulo.model.Calificacion;
 import com.informaticonfing.spring.springboot_modulo.model.FeedbackCalificacion;
@@ -14,6 +15,7 @@ import com.informaticonfing.spring.springboot_modulo.repository.CalificacionRepo
 import com.informaticonfing.spring.springboot_modulo.repository.ParametrosIdealesRepository;
 import com.informaticonfing.spring.springboot_modulo.repository.DetalleCalificacionRepository;
 import com.informaticonfing.spring.springboot_modulo.repository.FeedbackCalificacionRepository;
+=======
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -37,6 +39,7 @@ public class CalificacionService {
             ParametrosIdealesRepository parametrosRepo,
             DetalleCalificacionRepository detalleRepo,
             FeedbackCalificacionRepository feedbackRepo
+            DetalleCalificacionRepository detalleRepo
     ) {
         this.repository = repository;
         this.parametrosRepo = parametrosRepo;
@@ -150,6 +153,7 @@ public class CalificacionService {
             }
         }
 
+        Calificacion saved = repository.save(calificacion);
         return CalificacionMapper.toDTO(saved);
     }
 }

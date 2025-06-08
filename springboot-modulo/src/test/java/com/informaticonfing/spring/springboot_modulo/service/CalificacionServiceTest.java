@@ -14,14 +14,14 @@ import com.informaticonfing.spring.springboot_modulo.repository.FeedbackCalifica
 import com.informaticonfing.spring.springboot_modulo.dto.AiCalificacionDTO;
 import com.informaticonfing.spring.springboot_modulo.dto.AiDetalleDTO;
 import com.informaticonfing.spring.springboot_modulo.dto.AiFeedbackDTO;
+import com.informaticonfing.spring.springboot_modulo.dto.AiCalificacionDTO;
+import com.informaticonfing.spring.springboot_modulo.dto.AiDetalleDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,6 +40,7 @@ class CalificacionServiceTest {
         detalleRepo = mock(DetalleCalificacionRepository.class);
         feedbackRepo = mock(FeedbackCalificacionRepository.class);
         service = new CalificacionService(repository, parametrosRepo, detalleRepo, feedbackRepo);
+        service = new CalificacionService(repository, parametrosRepo, detalleRepo);
     }
 
     @Test

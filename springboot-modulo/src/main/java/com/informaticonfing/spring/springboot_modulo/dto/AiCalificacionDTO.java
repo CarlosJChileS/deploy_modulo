@@ -14,6 +14,7 @@ public class AiCalificacionDTO {
     private String observacionGlobalAi;
     private List<AiDetalleDTO> detalles;
     private List<AiFeedbackDTO> feedbacks;
+    private List<AiDetalleDTO> detalles;
 
     public Long getCalificacionId() { return calificacionId; }
     public void setCalificacionId(Long calificacionId) { this.calificacionId = calificacionId; }
@@ -29,4 +30,6 @@ public class AiCalificacionDTO {
 
     public List<AiFeedbackDTO> getFeedbacks() { return feedbacks; }
     public void setFeedbacks(List<AiFeedbackDTO> feedbacks) { this.feedbacks = feedbacks; }
+    public List<AiDetalleDTO> getDetalles() { return detalles; }
+    public void setDetalles(List<AiDetalleDTO> detalles) { this.detalles = detalles; }
 }
