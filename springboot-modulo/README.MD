@@ -211,4 +211,34 @@ Puedes consumir los endpoints principales desde internet (puedes probarlos con P
 * Asegúrate de que los registros relacionados (usuarios, grabaciones, parámetros ideales, etc.) existan en la base antes de hacer POST o PUT.
 * Las evidencias aquí mostradas son de rutas realmente probadas con Postman.
 * Puedes ampliar este módulo agregando más lógica de negocio o integraciones según las necesidades del proyecto.
-* La integración de IA corresponde a otro módulo del grupo; este módulo se enfoca exclusivamente en la lógica de calificación.
+* Ahora el módulo puede combinar calificaciones generadas por IA usando el nuevo método `aplicarCalificacionAI` en `CalificacionService`.
+
+## 🤖 Calificaciones asistidas por IA
+
+El servicio espera un JSON como el siguiente:
+
+```json
+{
+  "calificacionId": 1,
+  "puntajeGlobalAi": 7.0,
+  "detalles": [
+    { "criterioId": 5, "puntaje": 6 }
+  ]
+}
+```
+
+Cada detalle se promedia con el puntaje manual y se actualiza el `puntajeGlobal` final.
+
+Ejemplo de respuesta luego de aplicar la calificación de la IA:
+
+```json
+{
+  "id": 1,
+  "puntajeGlobal": 7.5
+}
+```
+
+Puedes encontrar estos ejemplos en los archivos
+`examples/ai_ejemplo_peticion.json` y
+`examples/ai_ejemplo_respuesta.json` para utilizarlos directamente con
+Postman u otra herramienta de prueba.

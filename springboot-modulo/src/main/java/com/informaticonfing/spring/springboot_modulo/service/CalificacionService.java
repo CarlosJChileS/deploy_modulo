@@ -2,11 +2,15 @@ package com.informaticonfing.spring.springboot_modulo.service;
 
 import com.informaticonfing.spring.springboot_modulo.dto.CalificacionRequestDTO;
 import com.informaticonfing.spring.springboot_modulo.dto.CalificacionResponseDTO;
+import com.informaticonfing.spring.springboot_modulo.dto.AiCalificacionDTO;
+import com.informaticonfing.spring.springboot_modulo.dto.AiDetalleDTO;
 import com.informaticonfing.spring.springboot_modulo.mapper.CalificacionMapper;
 import com.informaticonfing.spring.springboot_modulo.model.Calificacion;
 import com.informaticonfing.spring.springboot_modulo.model.ParametrosIdeales;
+import com.informaticonfing.spring.springboot_modulo.model.DetalleCalificacion;
 import com.informaticonfing.spring.springboot_modulo.repository.CalificacionRepository;
 import com.informaticonfing.spring.springboot_modulo.repository.ParametrosIdealesRepository;
+import com.informaticonfing.spring.springboot_modulo.repository.DetalleCalificacionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +24,16 @@ import java.util.stream.Collectors;
 public class CalificacionService {
     private final CalificacionRepository repository;
     private final ParametrosIdealesRepository parametrosRepo;
+    private final DetalleCalificacionRepository detalleRepo;
 
-    public CalificacionService(CalificacionRepository repository, ParametrosIdealesRepository parametrosRepo) {
+    public CalificacionService(
+            CalificacionRepository repository,
+            ParametrosIdealesRepository parametrosRepo,
+            DetalleCalificacionRepository detalleRepo
+    ) {
         this.repository = repository;
         this.parametrosRepo = parametrosRepo;
+        this.detalleRepo = detalleRepo;
     }
 
     /**
@@ -85,5 +95,35 @@ public class CalificacionService {
      */
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    /**
+     * Procesa las calificaciones generadas por IA y actualiza la calificación manual.
+     * Combina los puntajes manuales con los de la IA calculando un promedio.
+     * @param dto datos provenientes de la IA
+     * @return CalificacionResponseDTO actualizado con el puntaje final
+     */
+    public CalificacionResponseDTO aplicarCalificacionAI(AiCalificacionDTO dto) {
+        Calificacion calificacion = repository.findById(dto.getCalificacionId())
+                .orElseThrow(() -> new IllegalArgumentException("Calificación no encontrada"));
+
+        // Actualizar detalles promediando con los valores de IA
+        List<DetalleCalificacion> detalles = detalleRepo.findByCalificacionId(calificacion.getId());
+        for (AiDetalleDTO aiDetalle : dto.getDetalles()) {
+            detalles.stream()
+                    .filter(d -> d.getCriterioEvaluacion() != null &&
+                            d.getCriterioEvaluacion().getId().equals(aiDetalle.getCriterioId()))
+                    .findFirst()
+                    .ifPresent(d -> {
+                        double promedio = (d.getPuntaje() + aiDetalle.getPuntaje()) / 2.0;
+                        d.setPuntaje((int) Math.round(promedio));
+                        detalleRepo.save(d);
+                    });
+        }
+
+        double finalGlobal = (calificacion.getPuntajeGlobal() + dto.getPuntajeGlobalAi()) / 2.0;
+        calificacion.setPuntajeGlobal(finalGlobal);
+        Calificacion saved = repository.save(calificacion);
+        return CalificacionMapper.toDTO(saved);
     }
 }
