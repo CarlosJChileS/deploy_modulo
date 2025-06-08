@@ -32,7 +32,17 @@ mvn clean install
 
 ### 3. Configurar la base de datos
 
-Define las variables de entorno `DB_USERNAME` y `DB_PASSWORD` con las credenciales de tu instancia de PostgreSQL (por ejemplo, Supabase). El archivo `application.properties` lee estas variables automáticamente.
+Crea un archivo `.env` en la raíz del módulo con las variables necesarias para conectarte a tu instancia de PostgreSQL:
+
+```env
+DB_HOST=aws-0-us-east-2.pooler.supabase.com
+DB_PORT=6543
+DB_NAME=postgres
+DB_USERNAME=postgres.xuotujfajsosnsjvtxyh
+DB_PASSWORD=<tu_contraseña>
+```
+
+Luego ejecuta `source .env` (o define estas variables manualmente) antes de iniciar la aplicación. `application.properties` utiliza estas variables automáticamente.
 
 ### 4. Levantar el proyecto
 
@@ -243,7 +253,7 @@ Ejemplo de respuesta luego de aplicar la calificación de la IA:
   "grabacionId": 1,
   "usuarioId": 1,
   "puntajeGlobal": 7.5,
-  "observacionGlobal": "Muy buena exposición",
+  "observacionGlobal": "Buena exposición",
   "tipoCalificacion": "manual",
   "parametrosIdealesId": null,
   "detalles": [
@@ -258,7 +268,6 @@ Ejemplo de respuesta luego de aplicar la calificación de la IA:
     }
   ]
 
-  "obspuntajeGlobalervacionGlobal": "Buena exposición"
 
 }
 
@@ -267,5 +276,4 @@ Puedes encontrar estos ejemplos en los archivos
 `examples/ai_ejemplo_peticion.json` y
 `examples/ai_ejemplo_respuesta.json` para utilizarlos directamente con
 Postman u otra herramienta de prueba.
-  "puntajeGlobal": 7.5
 ```

@@ -38,7 +38,6 @@ public class CalificacionService {
             ParametrosIdealesRepository parametrosRepo,
             DetalleCalificacionRepository detalleRepo,
             FeedbackCalificacionRepository feedbackRepo
-            DetalleCalificacionRepository detalleRepo
     ) {
         this.repository = repository;
         this.parametrosRepo = parametrosRepo;
@@ -152,7 +151,6 @@ public class CalificacionService {
             }
         }
 
-        Calificacion saved = repository.save(calificacion);
 
         // Obtener los detalles actualizados para incluirlos en la respuesta
         List<DetalleCalificacion> detallesActualizados = detalleRepo.findByCalificacionId(saved.getId());
