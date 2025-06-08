@@ -237,8 +237,3 @@ Ejemplo de respuesta luego de aplicar la calificación de la IA:
   "puntajeGlobal": 7.5
 }
 ```
-
-Puedes encontrar estos ejemplos en los archivos
-`examples/ai_ejemplo_peticion.json` y
-`examples/ai_ejemplo_respuesta.json` para utilizarlos directamente con
-Postman u otra herramienta de prueba.
