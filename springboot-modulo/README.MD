@@ -32,7 +32,7 @@ mvn clean install
 
 ### 3. Configurar la base de datos
 
-Edita el archivo `application.properties` con tus credenciales de base de datos PostgreSQL (ya viene listo para Supabase, pero revisa que el usuario, password y url sean correctos).
+Define las variables de entorno `DB_USERNAME` y `DB_PASSWORD` con las credenciales de tu instancia de PostgreSQL (por ejemplo, Supabase). El archivo `application.properties` lee estas variables automáticamente.
 
 ### 4. Levantar el proyecto
 
@@ -121,6 +121,7 @@ El módulo está protegido con **Spring Security**.
 * **POST** `/api/calificaciones` – Crear
 * **PUT** `/api/calificaciones/{id}` – Actualizar
 * **DELETE** `/api/calificaciones/{id}` – Eliminar
+* **POST** `/api/calificaciones/ai` – Aplicar calificación con IA
 
 ### Criterios de Evaluación
 
@@ -211,4 +212,43 @@ Puedes consumir los endpoints principales desde internet (puedes probarlos con P
 * Asegúrate de que los registros relacionados (usuarios, grabaciones, parámetros ideales, etc.) existan en la base antes de hacer POST o PUT.
 * Las evidencias aquí mostradas son de rutas realmente probadas con Postman.
 * Puedes ampliar este módulo agregando más lógica de negocio o integraciones según las necesidades del proyecto.
-* La integración de IA corresponde a otro módulo del grupo; este módulo se enfoca exclusivamente en la lógica de calificación.
+* Ahora el módulo puede combinar calificaciones generadas por IA usando el nuevo método `aplicarCalificacionAI` en `CalificacionService`.
+
+## 🤖 Calificaciones asistidas por IA
+
+Envía la solicitud al endpoint `/api/calificaciones/ai` con un JSON como el siguiente:
+
+```json
+{
+  "calificacionId": 1,
+  "puntajeGlobalAi": 7.0,
+  "observacionGlobalAi": "Buena exposición",
+  "detalles": [
+    {
+      "criterioId": 5,
+      "puntaje": 6,
+      "comentario": "En la slide 4 tartamudeaste"
+    }
+  ],
+  "feedbacks": [
+    { "observacion": "Sigue practicando", "autor": "IA" }
+  ]
+}
+```
+
+Cada detalle se promedia con el puntaje manual y se actualiza el `puntajeGlobal` final.
+
+Ejemplo de respuesta luego de aplicar la calificación de la IA:
+
+```json
+{
+  "id": 1,
+  "puntajeGlobal": 7.5,
+  "observacionGlobal": "Buena exposición"
+}
+```
+
+Puedes encontrar estos ejemplos en los archivos
+`examples/ai_ejemplo_peticion.json` y
+`examples/ai_ejemplo_respuesta.json` para utilizarlos directamente con
+Postman u otra herramienta de prueba.
