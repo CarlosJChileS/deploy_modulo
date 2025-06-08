@@ -32,7 +32,17 @@ mvn clean install
 
 ### 3. Configurar la base de datos
 
-Define las variables de entorno `DB_USERNAME` y `DB_PASSWORD` con las credenciales de tu instancia de PostgreSQL (por ejemplo, Supabase). El archivo `application.properties` lee estas variables automáticamente.
+Crea un archivo `.env` en la raíz del módulo con las variables necesarias para conectarte a tu instancia de PostgreSQL:
+
+```env
+DB_HOST=aws-0-us-east-2.pooler.supabase.com
+DB_PORT=6543
+DB_NAME=postgres
+DB_USERNAME=postgres.xuotujfajsosnsjvtxyh
+DB_PASSWORD=<tu_contraseña>
+```
+
+Luego ejecuta `source .env` (o define estas variables manualmente) antes de iniciar la aplicación. `application.properties` utiliza estas variables automáticamente.
 
 ### 4. Levantar el proyecto
 
