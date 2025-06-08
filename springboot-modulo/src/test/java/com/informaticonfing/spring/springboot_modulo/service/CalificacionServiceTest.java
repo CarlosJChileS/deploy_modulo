@@ -142,6 +142,10 @@ class CalificacionServiceTest {
 
         assertNotNull(result);
         assertEquals(7.5, result.getPuntajeGlobal());
+        assertNotNull(result.getDetalles());
+        assertEquals(1, result.getDetalles().size());
+        assertEquals(5L, result.getDetalles().get(0).getCriterioId());
+        assertEquals(7, result.getDetalles().get(0).getPuntaje());
         verify(detalleRepo, times(1)).save(any(DetalleCalificacion.class));
     }
 }

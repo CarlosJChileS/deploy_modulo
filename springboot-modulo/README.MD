@@ -223,7 +223,12 @@ Envía la solicitud al endpoint `/api/calificaciones/ai` con un JSON como el sig
   "calificacionId": 1,
   "puntajeGlobalAi": 7.0,
   "detalles": [
-    { "criterioId": 5, "puntaje": 6 }
+    {
+      "criterioId": 5,
+      "puntaje": 6,
+      "slideId": 1,
+      "comentario": "Buen ritmo"
+    }
   ]
 }
 ```
@@ -235,6 +240,22 @@ Ejemplo de respuesta luego de aplicar la calificación de la IA:
 ```json
 {
   "id": 1,
-  "puntajeGlobal": 7.5
+  "grabacionId": 1,
+  "usuarioId": 1,
+  "puntajeGlobal": 7.5,
+  "observacionGlobal": "Muy buena exposición",
+  "tipoCalificacion": "manual",
+  "parametrosIdealesId": null,
+  "detalles": [
+    {
+      "id": 1,
+      "calificacionId": 1,
+      "criterioId": 5,
+      "slideId": 1,
+      "puntaje": 7,
+      "comentario": "Comentario del detalle",
+      "fragmentoAudioId": null
+    }
+  ]
 }
 ```
