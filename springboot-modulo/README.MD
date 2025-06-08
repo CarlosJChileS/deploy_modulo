@@ -32,7 +32,7 @@ mvn clean install
 
 ### 3. Configurar la base de datos
 
-Edita el archivo `application.properties` con tus credenciales de base de datos PostgreSQL (ya viene listo para Supabase, pero revisa que el usuario, password y url sean correctos).
+Define las variables de entorno `DB_USERNAME` y `DB_PASSWORD` con las credenciales de tu instancia de PostgreSQL (por ejemplo, Supabase). El archivo `application.properties` lee estas variables automáticamente.
 
 ### 4. Levantar el proyecto
 
@@ -121,6 +121,7 @@ El módulo está protegido con **Spring Security**.
 * **POST** `/api/calificaciones` – Crear
 * **PUT** `/api/calificaciones/{id}` – Actualizar
 * **DELETE** `/api/calificaciones/{id}` – Eliminar
+* **POST** `/api/calificaciones/ai` – Aplicar calificación con IA
 
 ### Criterios de Evaluación
 
@@ -215,7 +216,7 @@ Puedes consumir los endpoints principales desde internet (puedes probarlos con P
 
 ## 🤖 Calificaciones asistidas por IA
 
-El servicio espera un JSON como el siguiente:
+Envía la solicitud al endpoint `/api/calificaciones/ai` con un JSON como el siguiente:
 
 ```json
 {
