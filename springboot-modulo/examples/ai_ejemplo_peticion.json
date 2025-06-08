@@ -1,7 +1,11 @@
 {
   "calificacionId": 1,
   "puntajeGlobalAi": 7.0,
+  "observacionGlobalAi": "Buena exposición",
   "detalles": [
-    { "criterioId": 5, "puntaje": 6 }
+    { "criterioId": 5, "puntaje": 6, "comentario": "En la slide 4 tartamudeaste" }
+  ],
+  "feedbacks": [
+    { "observacion": "Sigue practicando", "autor": "IA" }
   ]
 }

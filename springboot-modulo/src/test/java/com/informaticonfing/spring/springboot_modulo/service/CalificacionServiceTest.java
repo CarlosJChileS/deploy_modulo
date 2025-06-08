@@ -10,8 +10,10 @@ import com.informaticonfing.spring.springboot_modulo.model.CriterioEvaluacion;
 import com.informaticonfing.spring.springboot_modulo.repository.CalificacionRepository;
 import com.informaticonfing.spring.springboot_modulo.repository.ParametrosIdealesRepository;
 import com.informaticonfing.spring.springboot_modulo.repository.DetalleCalificacionRepository;
+import com.informaticonfing.spring.springboot_modulo.repository.FeedbackCalificacionRepository;
 import com.informaticonfing.spring.springboot_modulo.dto.AiCalificacionDTO;
 import com.informaticonfing.spring.springboot_modulo.dto.AiDetalleDTO;
+import com.informaticonfing.spring.springboot_modulo.dto.AiFeedbackDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -28,6 +30,7 @@ class CalificacionServiceTest {
     private CalificacionRepository repository;
     private ParametrosIdealesRepository parametrosRepo;
     private DetalleCalificacionRepository detalleRepo;
+    private FeedbackCalificacionRepository feedbackRepo;
     private CalificacionService service;
 
     @BeforeEach
@@ -35,7 +38,8 @@ class CalificacionServiceTest {
         repository = mock(CalificacionRepository.class);
         parametrosRepo = mock(ParametrosIdealesRepository.class);
         detalleRepo = mock(DetalleCalificacionRepository.class);
-        service = new CalificacionService(repository, parametrosRepo, detalleRepo);
+        feedbackRepo = mock(FeedbackCalificacionRepository.class);
+        service = new CalificacionService(repository, parametrosRepo, detalleRepo, feedbackRepo);
     }
 
     @Test
@@ -128,20 +132,31 @@ class CalificacionServiceTest {
         when(detalleRepo.findByCalificacionId(1L)).thenReturn(List.of(detalle));
         when(detalleRepo.save(any(DetalleCalificacion.class))).thenReturn(detalle);
         when(repository.save(any(Calificacion.class))).thenAnswer(i -> i.getArgument(0));
+        when(feedbackRepo.save(any())).thenAnswer(i -> i.getArgument(0));
 
         AiDetalleDTO aiDetalle = new AiDetalleDTO();
         aiDetalle.setCriterioId(5L);
         aiDetalle.setPuntaje(6);
+        aiDetalle.setComentario("en la slide 4 tartamudeaste");
+
+        AiFeedbackDTO fb = new AiFeedbackDTO();
+        fb.setObservacion("Buen trabajo");
+        fb.setAutor("IA");
 
         AiCalificacionDTO dto = new AiCalificacionDTO();
         dto.setCalificacionId(1L);
         dto.setPuntajeGlobalAi(7.0);
         dto.setDetalles(List.of(aiDetalle));
+        dto.setObservacionGlobalAi("Observación global IA");
+        dto.setFeedbacks(List.of(fb));
 
         CalificacionResponseDTO result = service.aplicarCalificacionAI(dto);
 
         assertNotNull(result);
         assertEquals(7.5, result.getPuntajeGlobal());
         verify(detalleRepo, times(1)).save(any(DetalleCalificacion.class));
+        verify(feedbackRepo, times(1)).save(any());
+        assertEquals("Observación global IA", calificacion.getObservacionGlobal());
+        assertEquals("en la slide 4 tartamudeaste", detalle.getComentario());
     }
 }
