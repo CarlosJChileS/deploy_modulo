@@ -237,3 +237,4 @@ Ejemplo de respuesta luego de aplicar la calificación de la IA:
   "puntajeGlobal": 7.5
 }
 ```
+
