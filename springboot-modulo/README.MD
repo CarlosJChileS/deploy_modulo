@@ -259,6 +259,7 @@ Ejemplo de respuesta luego de aplicar la calificación de la IA:
   ]
 
   "obspuntajeGlobalervacionGlobal": "Buena exposición"
+
 }
 
 
