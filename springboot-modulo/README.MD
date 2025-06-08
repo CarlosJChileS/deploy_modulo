@@ -257,12 +257,10 @@ Ejemplo de respuesta luego de aplicar la calificación de la IA:
       "fragmentoAudioId": null
     }
   ]
-=======
-uhdxmj-codex/add-service-method-for-ai-grades
-  "": 7.5,
+
   "obspuntajeGlobalervacionGlobal": "Buena exposición"
 }
-```
+
 
 Puedes encontrar estos ejemplos en los archivos
 `examples/ai_ejemplo_peticion.json` y

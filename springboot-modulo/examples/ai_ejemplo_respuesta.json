@@ -1,6 +1,5 @@
 {
   "id": 1,
-  
   "grabacionId": 1,
   "usuarioId": 1,
   "puntajeGlobal": 7.5,
@@ -18,7 +17,6 @@
       "fragmentoAudioId": null
     }
   ]
-
   "puntajeGlobal": 7.5,
   "observacionGlobal": "Buena exposición"
   "puntajeGlobal": 7.5
