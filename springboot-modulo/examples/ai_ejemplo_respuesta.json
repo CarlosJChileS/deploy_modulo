@@ -3,7 +3,7 @@
   "grabacionId": 1,
   "usuarioId": 1,
   "puntajeGlobal": 7.5,
-  "observacionGlobal": "Muy buena exposición",
+  "observacionGlobal": "Buena exposición",
   "tipoCalificacion": "manual",
   "parametrosIdealesId": null,
   "detalles": [
@@ -17,8 +17,4 @@
       "fragmentoAudioId": null
     }
   ]
-
-  "puntajeGlobal": 7.5,
-  "observacionGlobal": "Buena exposición"
-  "puntajeGlobal": 7.5
 }
