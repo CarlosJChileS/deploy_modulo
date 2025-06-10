@@ -132,6 +132,7 @@ El módulo está protegido con **Spring Security**.
 * **PUT** `/api/calificaciones/{id}` – Actualizar
 * **DELETE** `/api/calificaciones/{id}` – Eliminar
 * **POST** `/api/calificaciones/ai` – Aplicar calificación con IA
+* **GET** `/api/calificaciones/ai/ejemplos` – Obtener ejemplos de petición y respuesta
 
 ### Criterios de Evaluación
 
@@ -274,6 +275,7 @@ Ejemplo de respuesta luego de aplicar la calificación de la IA:
 
 Puedes encontrar estos ejemplos en los archivos
 `examples/ai_ejemplo_peticion.json` y
-`examples/ai_ejemplo_respuesta.json` para utilizarlos directamente con
+`examples/ai_ejemplo_respuesta.json`, o consultarlos desde el
+endpoint `GET /api/calificaciones/ai/ejemplos` para utilizarlos directamente con
 Postman u otra herramienta de prueba.
 ```
