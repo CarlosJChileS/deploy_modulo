@@ -4,6 +4,11 @@ import com.informaticonfing.spring.springboot_modulo.dto.CalificacionRequestDTO;
 import com.informaticonfing.spring.springboot_modulo.dto.CalificacionResponseDTO;
 import com.informaticonfing.spring.springboot_modulo.service.CalificacionService;
 import com.informaticonfing.spring.springboot_modulo.dto.AiCalificacionDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.core.io.ClassPathResource;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,5 +91,20 @@ public class CalificacionController {
     @PostMapping("/ai")
     public CalificacionResponseDTO aplicarIA(@RequestBody AiCalificacionDTO dto) {
         return service.aplicarCalificacionAI(dto);
+    }
+
+    /**
+     * Devuelve los ejemplos de petición y respuesta para el endpoint de IA.
+     * @return mapa con los JSON de ejemplo
+     */
+    @GetMapping("/ai/ejemplos")
+    public Map<String, Object> ejemplosIA() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> result = new HashMap<>();
+        ClassPathResource peticion = new ClassPathResource("examples/ai_ejemplo_peticion.json");
+        ClassPathResource respuesta = new ClassPathResource("examples/ai_ejemplo_respuesta.json");
+        result.put("peticion", mapper.readValue(peticion.getInputStream(), Object.class));
+        result.put("respuesta", mapper.readValue(respuesta.getInputStream(), Object.class));
+        return result;
     }
 }
